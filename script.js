@@ -80,3 +80,60 @@ window.onclick = function(event) {
         closeSearchModal();
     }
 }
+// Función para reproducir el sonido
+function playSound() {
+    let audio = new Audio('alarma.mp3'); // Cambia 'reloj.mp3' por la ruta correcta a tu archivo de sonido
+    audio.play();
+}
+
+// Función para verificar las actividades programadas
+function verificarHorarios() {
+    const ahora = new Date();
+    const diaSemana = ahora.getDay();  // 0 = domingo, 1 = lunes, ..., 6 = sábado
+    const horas = ahora.getHours();
+    const minutos = ahora.getMinutes();
+
+    // Formato para facilitar la comparación (hora.minutos)
+    const horaActual = horas + minutos / 60;
+
+    if (diaSemana >= 1 && diaSemana <= 5) {  // Lunes a Viernes
+        // Dormir (8:00pm-4:00am)
+        if (horaActual >= 20 || horaActual < 4) playSound();
+
+        // Colegio (6:30am-1:40pm)
+        if (horaActual >= 6.5 && horaActual <= 13.666) playSound();
+
+        // Alistarse para el siguiente día (1:40pm-2:15pm)
+        if (horaActual >= 13.666 && horaActual <= 14.25) playSound();
+
+        // Poner a remojar la ropa (2:45pm-3:00pm)
+        if (horaActual >= 14.75 && horaActual <= 15) playSound();
+
+        // Lavar platos (3:00pm-3:20pm)
+        if (horaActual >= 15 && horaActual <= 15.333) playSound();
+
+        // Deberes, estudiar y adelantar materia (3:20pm-6:20pm)
+        if (horaActual >= 15.333 && horaActual <= 18.333) playSound();
+
+        // Entretenimiento (6:20pm-7:30pm)
+        if (horaActual >= 18.333 && horaActual <= 19.5) playSound();
+
+        // Acostarse (7:20pm-4:00am)
+        if (horaActual >= 19.333 || horaActual < 4) playSound();
+
+    } else {  // Festivos, sábados y domingos
+        // Dormir (8:00pm-7:00am)
+        if (horaActual >= 20 || horaActual < 7) playSound();
+
+        // Alistarse (7:00am-8:00am)
+        if (horaActual >= 7 && horaActual <= 8) playSound();
+
+        // Estudiar (8:00am-12:00pm)
+        if (horaActual >= 8 && horaActual <= 12) playSound();
+
+        // Entretenimiento (no hay horario específico, si quieres algo concreto, lo puedes agregar)
+    }
+}
+
+// Revisión del horario cada minuto
+setInterval(verificarHorarios, 60000); // Revisa cada minuto
