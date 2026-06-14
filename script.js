@@ -20,7 +20,7 @@ function changeBackground() {
 }
 
 function openApp(url) {
-    window.open(url, '_blank');
+    window.open(url, '_self');
 }
 
 function openAddressBar() {
@@ -50,7 +50,7 @@ function searchScratch() {
     const query = document.getElementById('searchInput').value;
     const formattedQuery = encodeURIComponent(query);
     const url = `https://scratch.mit.edu/search/projects?q=${formattedQuery}`;
-    window.open(url, '_blank');
+    window.open(url, '_self');
     closeSearchModal();
 }
 
